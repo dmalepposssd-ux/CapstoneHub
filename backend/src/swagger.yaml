@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: CapstoneHub API
+  version: 1.0.0
+paths:
+  /api/auth/login:
+    post:
+      summary: Login with email and password
+      responses:
+        "200":
+          description: JWT token and user profile
+  /api/dashboards/student:
+    get:
+      summary: Student dashboard data
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Student dashboard payload
+  /api/dashboards/supervisor:
+    get:
+      summary: Supervisor dashboard data
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Supervisor dashboard payload
+  /api/dashboards/admin:
+    get:
+      summary: Admin analytics dashboard
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Admin dashboard payload
+  /api/projects:
+    post:
+      summary: Submit project proposal
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Created project
+  /api/ai/match/{studentId}:
+    post:
+      summary: Generate supervisor matching suggestions
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Top matching supervisors
+  /api/ai/score-proposal/{projectId}:
+    post:
+      summary: Generate AI proposal scorecard
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Proposal scorecard
+  /api/ai/risk/{studentId}:
+    post:
+      summary: Predict student delay risk
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Risk score
+  /api/messages:
+    get:
+      summary: List threaded messages for current user
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Message list
+    post:
+      summary: Send a message to another user
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Created message
+  /api/admin/reports/projects.csv:
+    get:
+      summary: Export projects report as CSV
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: CSV report
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

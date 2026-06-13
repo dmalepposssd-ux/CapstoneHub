@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Cairo, system-ui, sans-serif;
+}
+
+.icon-btn {
+  @apply grid h-10 w-10 place-items-center rounded-lg border border-white/25 bg-white/10 text-white transition hover:bg-white/20 dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/20;
+}
+
+.panel {
+  @apply rounded-lg border border-emerald-950/10 bg-white p-5 shadow-sm shadow-emerald-950/5 dark:border-white/10 dark:bg-zinc-900;
+}
+
+.panel-title {
+  @apply text-xl font-extrabold;
+}
+
+.field {
+  @apply mt-4 w-full rounded-lg border border-zinc-300 bg-white px-4 py-3 outline-none focus:border-nile dark:border-zinc-700 dark:bg-zinc-950;
+}
+
+.primary-btn {
+  @apply mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-nile px-4 py-3 font-extrabold text-white transition hover:bg-emerald-900;
+}
+
+.secondary-btn {
+  @apply rounded-lg border border-nile px-3 py-2 text-sm font-extrabold text-nile transition hover:bg-green-50 dark:hover:bg-emerald-950;
+}
+
+.mini-action {
+  @apply inline-flex items-center gap-1 rounded-lg border border-black/10 bg-white px-2 py-1 text-xs font-extrabold transition hover:bg-zinc-50 dark:border-white/10 dark:bg-zinc-900 dark:hover:bg-zinc-800;
+}
+
+.diagram-editor-panel {
+  @apply mt-4 grid gap-3 rounded-lg bg-zinc-50 p-3 dark:bg-zinc-800;
+}
+
+.diagram-editor-tools {
+  @apply flex flex-wrap gap-2;
+}
+
+.diagram-editor-form {
+  @apply grid gap-3 rounded-lg border border-black/5 bg-white p-3 dark:border-white/10 dark:bg-zinc-900;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.diagram-editor-main-field {
+  @apply min-w-0;
+  grid-column: span 2;
+}
+
+.diagram-editor-action {
+  @apply self-end;
+}
+
+.diagram-editor-label {
+  @apply grid min-w-0 gap-1 text-xs font-extrabold text-zinc-600 dark:text-zinc-300;
+}
+
+.diagram-editor-input {
+  @apply h-11 w-full min-w-0 rounded-lg border border-zinc-300 bg-white px-3 text-sm font-bold outline-none focus:border-nile dark:border-zinc-700 dark:bg-zinc-950;
+}
+
+.diagram-editor-color {
+  @apply h-11 w-full min-w-0 rounded-lg border border-zinc-300 bg-white p-1 dark:border-zinc-700 dark:bg-zinc-950;
+}
+
+@media (max-width: 720px) {
+  .diagram-editor-main-field,
+  .diagram-editor-action {
+    grid-column: 1 / -1;
+  }
+}
+
+.toast {
+  @apply rounded-lg border border-emerald-200 bg-green-50 px-4 py-3 text-sm font-bold text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-100;
+}
+
+.data-table {
+  @apply w-full min-w-[620px] border-collapse text-sm;
+}
+
+.data-table th {
+  @apply bg-green-50 px-3 py-3 text-right text-emerald-950 dark:bg-emerald-950 dark:text-white;
+}
+
+.data-table td {
+  @apply border-t border-black/10 px-3 py-3 dark:border-white/10;
+}

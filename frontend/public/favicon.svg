@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#ffffff"/>
+  <rect x="10" y="10" width="492" height="492" fill="none" stroke="#08763f" stroke-width="20"/>
+  <g transform="translate(42 48) rotate(45 178 178)">
+    <rect x="64" y="64" width="260" height="260" rx="4" fill="#08763f"/>
+    <rect x="104" y="104" width="180" height="180" fill="#0b8f4d"/>
+    <path d="M64 190h260M190 64v260" stroke="#ffffff" stroke-width="10"/>
+  </g>
+  <text x="172" y="296" font-family="Georgia, 'Times New Roman', serif" font-size="150" font-weight="700" fill="#202020" stroke="#ffffff" stroke-width="8" paint-order="stroke">CPU</text>
+</svg>

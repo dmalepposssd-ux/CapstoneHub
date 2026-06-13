@@ -1,0 +1,222 @@
+export const assistantBenchmarkCases = [
+  {
+    id: "case-001",
+    difficulty: "medium",
+    student_prompt: "أريد عمل نظام لإدارة عيادة طبية يسمح للمريض بحجز موعد مع الطبيب، والطبيب يكتب التشخيص والوصفة، والإدارة تتابع المواعيد والتقارير.",
+    expected_domain: "healthcare",
+    expected_actors: ["Admin", "Patient", "Doctor"],
+    expected_tables: ["User", "Patient", "Doctor", "Appointment", "MedicalRecord", "Prescription", "Notification"],
+    expected_relationships: ["Patient-Appointment", "Doctor-Appointment", "Appointment-MedicalRecord", "Appointment-Prescription", "User-Notification"],
+    expected_pages: ["إدارة المرضى", "إدارة الأطباء", "حجز موعد", "الملف الطبي", "التقارير"],
+    evaluation_focus: "فصل بيانات المستخدم عن بيانات المريض والطبيب، وربط الوصفة والتشخيص بالموعد."
+  },
+  {
+    id: "case-002",
+    difficulty: "medium",
+    student_prompt: "مشروع متجر إلكتروني للمنتجات التقنية فيه زبائن، سلة، طلبات، دفع إلكتروني، شحن، ولوحة إدارة للمنتجات والفواتير.",
+    expected_domain: "commerce",
+    expected_actors: ["Admin", "Customer"],
+    expected_tables: ["User", "Customer", "Product", "Category", "Cart", "Order", "Payment", "Shipment", "Invoice"],
+    expected_relationships: ["Customer-Cart", "Cart-Product", "Customer-Order", "Order-Payment", "Order-Shipment", "Order-Invoice"],
+    expected_pages: ["قائمة المنتجات", "تفاصيل المنتج", "السلة", "الدفع", "إدارة الطلبات"],
+    evaluation_focus: "وجود فصل بين السلة والطلب النهائي، وربط الدفع والشحن بالطلب."
+  },
+  {
+    id: "case-003",
+    difficulty: "hard",
+    student_prompt: "أريد منصة تعليمية فيها مدرسين وطلاب ومقررات وواجبات وتسليمات ودرجات ورسائل بين المدرس والطالب وتنبيهات عند قرب موعد التسليم.",
+    expected_domain: "education",
+    expected_actors: ["Admin", "Student", "Instructor"],
+    expected_tables: ["User", "Student", "Instructor", "Course", "Enrollment", "Assignment", "Submission", "Grade", "Message", "Notification"],
+    expected_relationships: ["Instructor-Course", "Student-Enrollment", "Course-Enrollment", "Course-Assignment", "Assignment-Submission", "Submission-Grade"],
+    expected_pages: ["إدارة المقررات", "صفحة الواجبات", "رفع التسليم", "الدرجات", "المحادثات"],
+    evaluation_focus: "وجود enrollment كجدول ربط بين الطلاب والمقررات."
+  },
+  {
+    id: "case-004",
+    difficulty: "medium",
+    student_prompt: "نظام حجز قاعات جامعية يسمح للمدرس بحجز قاعة بوقت محدد، والإدارة توافق أو ترفض، ويرسل النظام تنبيهات للحجوزات القادمة.",
+    expected_domain: "booking",
+    expected_actors: ["Admin", "Instructor"],
+    expected_tables: ["User", "Resource", "Schedule", "Booking", "Notification", "StatusHistory"],
+    expected_relationships: ["Resource-Schedule", "User-Booking", "Resource-Booking", "Booking-StatusHistory", "User-Notification"],
+    expected_pages: ["تقويم القاعات", "طلب حجز", "مراجعة الحجوزات", "التنبيهات"],
+    evaluation_focus: "منع تضارب المواعيد لنفس القاعة وربط الموافقة بسجل حالة."
+  },
+  {
+    id: "case-005",
+    difficulty: "medium",
+    student_prompt: "تطبيق لإدارة مخزون مستودع، فيه مواد وموردين وحركات إدخال وإخراج وتنبيه عندما تصبح الكمية أقل من الحد الأدنى.",
+    expected_domain: "inventory",
+    expected_actors: ["Admin", "User", "Supplier"],
+    expected_tables: ["User", "Warehouse", "Supplier", "Item", "StockMovement", "PurchaseOrder", "InventoryAlert"],
+    expected_relationships: ["Warehouse-Item", "Supplier-PurchaseOrder", "Item-StockMovement", "Item-InventoryAlert"],
+    expected_pages: ["إدارة المواد", "حركة المخزون", "الموردون", "أوامر الشراء", "تنبيهات النقص"],
+    evaluation_focus: "وجود stock movements بدل تعديل الكمية بدون سجل."
+  },
+  {
+    id: "case-006",
+    difficulty: "easy",
+    student_prompt: "نظام مكتبة جامعية لإدارة الكتب والأعضاء والإعارات والغرامات عند التأخير.",
+    expected_domain: "library",
+    expected_actors: ["Admin", "Member"],
+    expected_tables: ["User", "Member", "Book", "Author", "Category", "Loan", "Fine"],
+    expected_relationships: ["Author-Book", "Category-Book", "Member-Loan", "Book-Loan", "Loan-Fine"],
+    expected_pages: ["فهرس الكتب", "إدارة الأعضاء", "إعارة كتاب", "الغرامات"],
+    evaluation_focus: "ربط الغرامة بالإعارة وليس بالعضو مباشرة فقط."
+  },
+  {
+    id: "case-007",
+    difficulty: "hard",
+    student_prompt: "منصة عقارات فيها مالك ينشر شقق للبيع أو الإيجار، ومستأجر أو مشتري يبحث ويتواصل، ويتم إنشاء عقد وتسجيل الدفعات.",
+    expected_domain: "realestate",
+    expected_actors: ["Admin", "Owner", "Tenant", "User"],
+    expected_tables: ["User", "Owner", "Tenant", "Property", "Listing", "Contract", "Payment", "Message"],
+    expected_relationships: ["Owner-Property", "Property-Listing", "Property-Contract", "Tenant-Contract", "Contract-Payment", "User-Message"],
+    expected_pages: ["قائمة العقارات", "تفاصيل العقار", "إدارة العقود", "المدفوعات", "المحادثات"],
+    evaluation_focus: "تمييز العقار عن الإعلان، وربط العقد بالعقار والطرف المستأجر."
+  },
+  {
+    id: "case-008",
+    difficulty: "hard",
+    student_prompt: "نظام توصيل طلبات فيه زبون يرسل طلب، وسائق يستلم الرحلة، وفيه تتبع حالة الطلب والموقع والدفع بعد التسليم.",
+    expected_domain: "transport",
+    expected_actors: ["Admin", "Customer", "Driver"],
+    expected_tables: ["User", "Driver", "Vehicle", "Trip", "Route", "Shipment", "Payment", "TrackingEvent"],
+    expected_relationships: ["Driver-Vehicle", "Driver-Trip", "Route-Trip", "Trip-TrackingEvent", "Trip-Payment"],
+    expected_pages: ["إنشاء طلب", "تعيين سائق", "تتبع الطلب", "المدفوعات", "إدارة الرحلات"],
+    evaluation_focus: "وجود TrackingEvent كسجل زمني لحالات ومواقع الرحلة."
+  },
+  {
+    id: "case-009",
+    difficulty: "medium",
+    student_prompt: "تطبيق مطعم يسمح للزبون بطلب وجبات من المنيو، والمطبخ يرى الطلبات الجديدة، والتوصيل يغير حالة الطلب حتى التسليم.",
+    expected_domain: "restaurant",
+    expected_actors: ["Admin", "Customer", "User"],
+    expected_tables: ["User", "Customer", "MenuItem", "Category", "Order", "OrderItem", "Payment", "Delivery", "StatusHistory"],
+    expected_relationships: ["Category-MenuItem", "Customer-Order", "Order-OrderItem", "MenuItem-OrderItem", "Order-Payment", "Order-Delivery"],
+    expected_pages: ["قائمة الطعام", "السلة", "إدارة المطبخ", "متابعة الطلب", "التوصيل"],
+    evaluation_focus: "وجود OrderItem كجدول تفصيلي بين الطلب والوجبات."
+  },
+  {
+    id: "case-010",
+    difficulty: "hard",
+    student_prompt: "نظام لإدارة مشاريع التخرج فيه طالب ومشرف وإدارة، الطالب يرسل مقترح، المشرف يراجع، الطالب يرفع ملفات، وفيه مراحل ومواعيد وتنبيهات وتقييم نهائي.",
+    expected_domain: "education",
+    expected_actors: ["Admin", "Student", "Supervisor"],
+    expected_tables: ["User", "Student", "Instructor", "Project", "Submission", "File", "Notification", "Review", "Grade", "StatusHistory"],
+    expected_relationships: ["Student-Project", "Instructor-Project", "Project-Submission", "Project-StatusHistory", "User-Notification", "Project-Review"],
+    expected_pages: ["طلب مشروع", "مراجعة المقترحات", "رفع الملفات", "المخطط الزمني", "التقييم"],
+    evaluation_focus: "وجود دورة حياة واضحة للمشروع وسجل حالات وربط الملفات بالمشروع."
+  },
+  {
+    id: "case-011",
+    difficulty: "medium",
+    student_prompt: "منصة استبيانات شبيهة بكوبو، الإدارة تصمم نموذج أسئلة وتحدد الطلاب أو المشرفين، والمستخدمون يعبئون الإجابات، وآخر الشي يتم تصدير Excel.",
+    expected_domain: "generic",
+    expected_actors: ["Admin", "Student", "Supervisor"],
+    expected_tables: ["User", "SurveyForm", "SurveyQuestion", "SurveyResponse", "SurveyAnswer", "File", "Report"],
+    expected_relationships: ["SurveyForm-SurveyQuestion", "SurveyForm-SurveyResponse", "SurveyResponse-SurveyAnswer", "User-SurveyResponse", "Report-File"],
+    expected_pages: ["إنشاء استبيان", "تعبئة استبيان", "نتائج الاستبيان", "تصدير Excel"],
+    evaluation_focus: "تمييز بنية النموذج عن الإجابات، ودعم أسئلة متعددة الأنواع."
+  },
+  {
+    id: "case-012",
+    difficulty: "hard",
+    student_prompt: "مساعد ذكي يقرأ ملفات Word و PDF لمشاريع الطلاب، يستخرج النص، يعطي ملاحظات لغوية، ويقترح ERD و Use Case بناء على فكرة المشروع.",
+    expected_domain: "generic",
+    expected_actors: ["Admin", "Student", "Supervisor"],
+    expected_tables: ["User", "Project", "File", "DocumentAnalysis", "Review", "Report", "Notification"],
+    expected_relationships: ["User-Project", "Project-File", "File-DocumentAnalysis", "Project-Review", "DocumentAnalysis-Report"],
+    expected_pages: ["رفع ملف", "نتيجة التحليل", "مخططات مقترحة", "مراجعة المشرف"],
+    evaluation_focus: "وجود جدول مستقل لتحليلات الملفات وعدم تخزين التحليل كنص غير منظم فقط."
+  },
+  {
+    id: "case-013",
+    difficulty: "medium",
+    student_prompt: "نظام لإدارة حضور الطلاب بالمخابر باستخدام QR، المدرس ينشئ جلسة والطالب يمسح الرمز، والإدارة ترى تقارير الغياب.",
+    expected_domain: "education",
+    expected_actors: ["Admin", "Student", "Instructor"],
+    expected_tables: ["User", "Student", "Instructor", "Course", "Schedule", "Attendance", "Report", "Notification"],
+    expected_relationships: ["Instructor-Course", "Course-Schedule", "Student-Attendance", "Schedule-Attendance", "Report-File"],
+    expected_pages: ["إنشاء جلسة", "مسح QR", "سجل الحضور", "تقارير الغياب"],
+    evaluation_focus: "فصل الجلسة أو الجدولة عن سجل الحضور الفعلي لكل طالب."
+  },
+  {
+    id: "case-014",
+    difficulty: "hard",
+    student_prompt: "منصة تدريب جامعي تربط الطلاب بالشركات، الشركة تنشر فرصة، الطالب يقدم، المشرف يتابع تقرير التدريب والتقييم النهائي.",
+    expected_domain: "education",
+    expected_actors: ["Admin", "Student", "Supervisor", "Company"],
+    expected_tables: ["User", "Student", "Company", "Internship", "Application", "Report", "Review", "Notification"],
+    expected_relationships: ["Company-Internship", "Student-Application", "Internship-Application", "Student-Report", "Report-Review"],
+    expected_pages: ["فرص التدريب", "تقديم طلب", "متابعة التدريب", "تقييم نهائي"],
+    evaluation_focus: "تمييز فرصة التدريب عن طلب الطالب وعن تقارير المتابعة."
+  },
+  {
+    id: "case-015",
+    difficulty: "medium",
+    student_prompt: "تطبيق صيانة للأجهزة في الجامعة، الموظف يرسل بلاغ، الفني يستلم البلاغ، ويتم تتبع الحالة وقطع الغيار المستخدمة.",
+    expected_domain: "generic",
+    expected_actors: ["Admin", "User", "Technician"],
+    expected_tables: ["User", "Ticket", "StatusHistory", "Attachment", "Item", "Report", "Notification"],
+    expected_relationships: ["User-Ticket", "Ticket-StatusHistory", "Ticket-Attachment", "Ticket-Item", "User-Notification"],
+    expected_pages: ["إرسال بلاغ", "لوحة الفني", "تفاصيل البلاغ", "تقارير الصيانة"],
+    evaluation_focus: "وجود سجل حالة للبلاغ وملفات مرفقة وربط قطع الغيار بالبلاغ."
+  },
+  {
+    id: "case-016",
+    difficulty: "hard",
+    student_prompt: "نظام أرشفة وثائق إلكتروني فيه أقسام ومستخدمون وملفات، صلاحيات وصول، سجل تحميل وتعديل، وبحث ضمن البيانات الوصفية.",
+    expected_domain: "generic",
+    expected_actors: ["Admin", "User"],
+    expected_tables: ["User", "Role", "Permission", "File", "Attachment", "StatusHistory", "Report"],
+    expected_relationships: ["User-Role", "Role-Permission", "User-File", "File-StatusHistory", "Report-File"],
+    expected_pages: ["رفع وثيقة", "بحث الوثائق", "إدارة الصلاحيات", "سجل العمليات"],
+    evaluation_focus: "وجود صلاحيات وسجل عمليات وليس مجرد جدول ملفات."
+  },
+  {
+    id: "case-017",
+    difficulty: "medium",
+    student_prompt: "موقع لحجز مواعيد مخابر حاسوب، الطالب أو المدرس يختار مخبر ووقت، والنظام يمنع تضارب الحجوزات ويرسل تنبيهات.",
+    expected_domain: "booking",
+    expected_actors: ["Admin", "Student", "Instructor"],
+    expected_tables: ["User", "Resource", "Schedule", "Booking", "Notification", "StatusHistory"],
+    expected_relationships: ["Resource-Schedule", "User-Booking", "Resource-Booking", "Booking-StatusHistory", "User-Notification"],
+    expected_pages: ["تقويم المخابر", "طلب حجز", "مراجعة الحجوزات", "التنبيهات"],
+    evaluation_focus: "منع تضارب المواعيد وربط الحجز بالمورد والجدول."
+  },
+  {
+    id: "case-018",
+    difficulty: "hard",
+    student_prompt: "نظام توصية لمشاريع التخرج يقارن اهتمامات الطالب مع خبرات المشرفين والمشاريع السابقة ويقترح أفضل مشرف وفكرة.",
+    expected_domain: "education",
+    expected_actors: ["Admin", "Student", "Supervisor"],
+    expected_tables: ["User", "Student", "Instructor", "Project", "Review", "Report", "Notification"],
+    expected_relationships: ["Student-Project", "Instructor-Project", "Project-Review", "Report-File", "User-Notification"],
+    expected_pages: ["ملف الطالب", "اقتراح مشرف", "اقتراح فكرة", "نتائج المطابقة"],
+    evaluation_focus: "وجود بيانات قابلة للقياس للمطابقة وليس نصوصاً فقط."
+  },
+  {
+    id: "case-019",
+    difficulty: "medium",
+    student_prompt: "تطبيق لإدارة فعاليات الجامعة، الإدارة تنشئ فعالية، الطلاب يسجلون حضورهم، ويوجد شهادات حضور وتقييم للفعالية.",
+    expected_domain: "education",
+    expected_actors: ["Admin", "Student"],
+    expected_tables: ["User", "Student", "Event", "Enrollment", "Review", "File", "Notification"],
+    expected_relationships: ["Student-Enrollment", "Event-Enrollment", "Event-Review", "User-Notification", "Report-File"],
+    expected_pages: ["قائمة الفعاليات", "تفاصيل الفعالية", "تسجيل حضور", "الشهادات", "تقييم الفعالية"],
+    evaluation_focus: "تمييز التسجيل في الفعالية عن تقييمها وعن شهادة الحضور."
+  },
+  {
+    id: "case-020",
+    difficulty: "hard",
+    student_prompt: "نظام متابعة أطروحات ماجستير، الطالب يرفع فصول، اللجنة تضع ملاحظات، يوجد نسخ متعددة للملف ومواعيد دفاع وتقارير تقدم.",
+    expected_domain: "education",
+    expected_actors: ["Admin", "Student", "Supervisor", "Instructor"],
+    expected_tables: ["User", "Student", "Instructor", "Project", "Submission", "File", "Review", "Schedule", "Report", "Notification"],
+    expected_relationships: ["Student-Project", "Instructor-Project", "Project-Submission", "Submission-File", "Submission-Review", "Project-Schedule"],
+    expected_pages: ["رفع فصل", "ملاحظات اللجنة", "نسخ الملفات", "مواعيد الدفاع", "تقارير التقدم"],
+    evaluation_focus: "دعم النسخ المتعددة والمراجعات وليس ملفاً واحداً فقط."
+  }
+];
